@@ -28,13 +28,19 @@ num = 0
 powerpoint = comtypes.client.CreateObject("Powerpoint.Application")
 files = listdir(path)
 for file in files:
+    try:
         if file.endswith(".ppt"):
             pp=path+'\\'+file
             print(pp)
             pr=powerpoint.Presentations.Open(pp,WithWindow=False)
             pr.SaveAs(pp[:-3]+'pptx')
             pr.Close()
-            os.remove(pp) 
+            os.remove(pp)
+    except Exception as e:
+                print(e)
+                print("**************************************")
+                print("*数据异常--请手动处理--按回车继续处理*")
+                input("**************************************")
 
 
 #排查敏感字符
@@ -54,9 +60,8 @@ def text_r():
                              ('读爱',''),('读爱礼坊',''),('米鸽米','XXX'),('米鸽设计','XXX'),('千图网',''),('凤凰办公',''),('亮亮图文','')]#需要替换的内容
                 TEXT_NEED_REPLACE2 = [('版权声明'),('包图网')]
                 #读取kw
-                with open(path2, 'r') as f:
-                    s = [i[:-1].split('，' or ',') for i in f.readlines()]
-                print(TEXT_NEED_REPLACE)
+                with open(path2, 'r',encoding='UTF-8') as f:
+                    s = [i[:-1].split('，') for i in f.readlines()]
                 for i in range(len(s)):
                     TEXT_NEED_REPLACE.extend([(s[i][0], s[i][1])])
 
@@ -139,7 +144,7 @@ def nrt():
             sss=sss+1
             try:
                 fullpath = os.path.join(path, pptfile)
-                print('导出图片'+str(sss))
+                print('导出图片'+str(sss)+'   '+pptfile)
                 ppt_to_picture(powerpoint, fullpath, fullpath)
             except Exception as e:
                 print(e)
@@ -224,7 +229,6 @@ def mpf():
     import re
     from os import listdir
     import shutil
-    path='C:\\ppt'
 
     def ppt_to_mp4(ppt_path,mp4_target,resolution = 480,frames = 20,quality = 30,timeout = 600):
         # status:Convert result. 0:failed. -1: timeout. 1:success.
@@ -322,13 +326,19 @@ def mpf():
 def ppt():
     files = listdir(path)
     for file in files:
-        if file.endswith(".ppt"):
-            pp=path+'\\'+file
-            print(pp)
-            pr=powerpoint.Presentations.Open(pp,WithWindow=False)
-            pr.SaveAs(pp[:-3]+'pptx')
-            pr.Close()
-            os.remove(pp)
+        try:
+            if file.endswith(".ppt"):
+                pp=path+'\\'+file
+                print(pp)
+                pr=powerpoint.Presentations.Open(pp,WithWindow=False)
+                pr.SaveAs(pp[:-3]+'pptx')
+                pr.Close()
+                os.remove(pp)
+        except Exception as e:
+                print(e)
+                print("**************************************")
+                print("*数据异常--请手动处理--按回车继续处理*")
+                input("**************************************")
 
 def wj():
     files = listdir(path)
@@ -339,13 +349,19 @@ def wj():
             Path = path+'\\'+file
             Files = listdir(Path)
             for File in Files:
-                if File.endswith(".ppt"):
-                    pp=Path+'\\'+File
-                    print(pp)
-                    pr=powerpoint.Presentations.Open(pp,WithWindow=False)
-                    pr.SaveAs(pp[:-3]+'pptx')
-                    pr.Close()
-                    os.remove(pp)
+                try:    
+                    if File.endswith(".ppt"):
+                        pp=Path+'\\'+File
+                        print(pp)
+                        pr=powerpoint.Presentations.Open(pp,WithWindow=False)
+                        pr.SaveAs(pp[:-3]+'pptx')
+                        pr.Close()
+                        os.remove(pp)
+                except Exception as e:
+                        print(e)
+                        print("**************************************")
+                        print("*数据异常--请手动处理--按回车继续处理*")
+                        input("**************************************")
 
 
 kg='0'
